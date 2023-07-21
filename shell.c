@@ -67,7 +67,45 @@ free(line);
  */
 void inter(char **argv)
 {
-printf("%s interactive\n", argv[0]);
+int times = 0, check, status = 0;
+ssize_t  r_line;
+size_t length = 0;
+char **cmdAft = {NULL}, *environ[] = {NULL};
+char *commnd, *line = NULL, *line_handled;
+while (1)
+{
+times++;
+write(STDOUT_FILENO, "$ ", 2);
+r_line = getline(&line, &length, stdin);
+if (r_line == -1)
+{
+write(STDOUT_FILENO, "\n", 1);
+break;
+}
+line_handled = handle_line(line);
+commnd = excable(line_handled);
+if (str_compare(line_handled, "\n") == 0 || line_handled[0] == '#')
+	continue;
+else if (builtinOrNo(line_handled, argv[0], times, line, &status) != -1)
+{
+free(commnd);
+continue;
+}
+else if (commnd)
+{
+cmdAft = cmdAfter(line_handled);
+check = excute(commnd, cmdAft, environ, &status);
+if (check == 0)
+	_error_(times, argv[0], status, line_handled);
+}
+else if (commnd == NULL)
+{
+excute_sec_case(line_handled, cmdAft, environ, &status);
+_error_(times, argv[0], status, line_handled);
+}
+free(commnd);
+}
+free(line);
 }
 /**
  * handle_line - that handle line from start spaces oth..
