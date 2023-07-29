@@ -13,7 +13,7 @@ int builtinOrNo(char *line, char *prog, int count, char *ml,  int *status)
 int flag = 1, i;
 char *copied;
 char *built_cmd[] = {"exit", "env", "echo"};
-copied = strtok(_str_dup(line), " ");
+copied = strtok(strdup(line), " ");
 for (i = 1; i < 2 ; i++)
 {
 if (str_compare(copied, built_cmd[i]) == 0)
