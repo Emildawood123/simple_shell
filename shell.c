@@ -162,16 +162,16 @@ _str_concat(buff, "/");
 _str_concat(buff, p_copied);
 if (access(buff, F_OK) == 0)
 {
-free(p);
 free(p_copied);
+free(p);
 return (buff);
 }
 free(buff);
 token = strtok(NULL, ":");
 if (token == NULL)
 {
-free(p);
 free(p_copied);
+free(p);
 return (NULL);
 }
 }
