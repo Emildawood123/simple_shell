@@ -116,9 +116,13 @@ char *handle_line(char *line)
 {
 int i = 0;
 ssize_t len;
-while (line[i] == ' ')
+while (line[i])
+{
+if (line[i] != ' ')
 {
 line += i;
+break;
+}
 i++;
 }
 len = str_length(line);
@@ -172,7 +176,6 @@ if (token == NULL)
 {
 free(p_copied);
 free(p);
-return (NULL);
 }
 }
 return (NULL);
