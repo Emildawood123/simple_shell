@@ -51,7 +51,7 @@ int _exit_(char *line, char *prog, int count, char *ml, int *status)
 {
 int i = 0, key = 0, key_valid = 1;
 char *st, *copied;
-copied = strtok(_str_dup(line), " ");
+copied = strtok(strdup(line), " ");
 st = strtok(NULL, " ");
 if (st == NULL)
 {
