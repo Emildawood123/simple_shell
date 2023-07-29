@@ -14,7 +14,7 @@ int flag = 1, i;
 char *copied;
 char *built_cmd[] = {"exit", "env", "echo"};
 copied = strtok(strdup(line), " ");
-for (i = 1; i < 2 ; i++)
+for (i = 0; i < 2 ; i++)
 {
 if (str_compare(copied, built_cmd[i]) == 0)
 {
