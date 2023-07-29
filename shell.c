@@ -130,7 +130,10 @@ if (line[0] == '\n' && len == 1)
 {
 return (line);
 }
+if (line[len - 1] == '\n')
+{
 line[len - 1] = '\0';
+}
 return (line);
 }
 /**
